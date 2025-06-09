@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +26,12 @@ public class IndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         List<Todo> todos = em.createNamedQuery("getAllTodo", Todo.class).getResultList();
-        response.getWriter().append(Integer.valueOf(todos.size()).toString());
 
-        em.close();    }
+        em.close();
+
+        request.setAttribute("todos", todos);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/todos/index.jsp");
+        rd.forward(request, response);
+    }
 }
