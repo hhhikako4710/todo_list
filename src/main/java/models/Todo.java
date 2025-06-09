@@ -16,7 +16,11 @@ import jakarta.persistence.Table;
     @NamedQuery(
         name = "getAllTodo",
         query = "SELECT m FROM Todo AS m ORDER BY m.id DESC"
-    )
+    ),
+    @NamedQuery(
+            name = "getTodoCount",
+            query = "SELECT COUNT(m) FROM Todo AS m"
+            )
 })
 @Table(name = "todos")
 public class Todo {

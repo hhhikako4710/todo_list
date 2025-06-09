@@ -2,16 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <h2>id : ${todo.id} の編集ページ</h2>
-
-        <form method="POST" action="${pageContext.request.contextPath}/update">
-            <c:import url="_form.jsp" />
-            <label> <input type="checkbox" name="done"
-                <c:if test="${todo.done}">checked</c:if> /> 完了
-            </label>
-        </form>
+        <c:choose>
+            <c:when test = "${todo != null}">
+                <h2>id : ${todo.id} の編集ページ</h2>
         
-        <p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
+                <form method="POST" action="${pageContext.request.contextPath}/update">
+                    <c:import url="_form.jsp" />
+                    <label> <input type="checkbox" name="done"
+                        <c:if test="${todo.done}">checked</c:if> /> 完了
+                    </label>
+                </form>
+            </c:when>
+            <c:otherwise>
+                <h2>お探しのデータは見つかりませんでした。</h2>
+            </c:otherwise>
+        </c:choose>
+                <p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
 
     </c:param>
 </c:import>
