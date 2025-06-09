@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "getAllTodo",
-        query = "SELECT m FROM Todo AS m ORDER BY m.id"
+        query = "SELECT m FROM Todo AS m ORDER BY m.id DESC"
     )
 })
 @Table(name = "todos")
